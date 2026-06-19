@@ -416,11 +416,12 @@ input[type="text"]::placeholder {
 .secret-text {
   position: relative;
   z-index: 1;
-  font-family: 'Great Vibes', cursive;
-  font-size: 1.3rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.85rem;
+  font-weight: 700;
   color: #FFD700;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.1em;
 }
 
 /* ── Success State ─────────────────────────── */
