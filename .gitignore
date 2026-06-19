@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Data (reset on deploy — confessions are ephemeral)
+data/confessions.json
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local

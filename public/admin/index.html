@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal — Cabaret Confessions</title>
+  <meta name="description" content="Manage confessions, slides, and settings for Cabaret Night">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/admin/styles.css">
+</head>
+<body>
+  <!-- Background particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Sticky header -->
+  <header class="header" id="header">
+    <div class="header-left">
+      <h1 class="logo">Cabaret Confessions</h1>
+      <span class="logo-sub">Admin Portal</span>
+    </div>
+    <nav class="nav">
+      <a href="/" class="nav-link" target="_blank">🎭 Landing</a>
+      <a href="/slideshow" class="nav-link" target="_blank">📺 Slideshow</a>
+    </nav>
+  </header>
+
+  <main class="main">
+
+    <!-- ── Settings Panel ───────────────────── -->
+    <section class="panel" id="settings-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">⚙️ Settings</h2>
+      </div>
+      <div class="settings-grid">
+        <div class="setting-item">
+          <label for="slide-duration">Slide Duration</label>
+          <div class="input-group">
+            <input type="number" id="slide-duration" min="3" max="120" value="8">
+            <span class="input-suffix">seconds</span>
+          </div>
+        </div>
+        <div class="setting-item">
+          <label for="require-approval">Require Approval</label>
+          <p class="setting-desc">When enabled, new confessions must be approved before appearing on the slideshow.</p>
+          <label class="toggle">
+            <input type="checkbox" id="require-approval">
+            <span class="toggle-track">
+              <span class="toggle-thumb"></span>
+            </span>
+            <span class="toggle-label" id="approval-label">Off — confessions go live immediately</span>
+          </label>
+        </div>
+      </div>
+      <button class="btn btn-gold" id="save-settings">
+        <span>Save Settings</span>
+      </button>
+    </section>
+
+    <!-- ── Custom Slides Panel ──────────────── -->
+    <section class="panel" id="custom-slides-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">🎬 Custom Slides</h2>
+        <span class="badge" id="custom-count">0</span>
+      </div>
+      <div class="add-form">
+        <textarea id="custom-slide-text" placeholder="Type an announcement, welcome message, or special slide..." rows="2"></textarea>
+        <button class="btn btn-gold btn-add" id="add-custom-slide">Add Slide</button>
+      </div>
+      <div class="card-list" id="custom-slides-list">
+        <div class="empty-state">No custom slides yet. Add announcements or event messages above.</div>
+      </div>
+    </section>
+
+    <!-- ── Confessions Panel ────────────────── -->
+    <section class="panel" id="confessions-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">💋 Confessions</h2>
+        <span class="badge" id="confession-count">0</span>
+      </div>
+      <div class="card-list" id="confessions-list">
+        <div class="empty-state">No confessions yet. The night is still young...</div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="/static/admin/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Hotel Confessions — Cabaret Night</title>
+  <meta name="description" content="Share your deepest hotel confession at tonight's cabaret event.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/landing/styles.css">
+</head>
+<body>
+  <!-- Background video — playsinline required for iOS Safari -->
+  <video id="bg-video" autoplay loop muted playsinline disableRemotePlayback>
+    <source src="/static/everafter.MP4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+
+  <!-- Floating gold particles -->
+  <div class="particles" id="particles"></div>
+
+  <main class="container" id="main-container">
+    <div class="form-card" id="form-card">
+      <h1 class="title" id="page-title">What's your hotel confession?</h1>
+
+      <form id="confession-form" autocomplete="off">
+        <div class="form-group">
+          <textarea
+            id="confession-text"
+            placeholder="Spill your secrets, darling..."
+            rows="4"
+            maxlength="500"
+            required
+            enterkeyhint="next"
+          ></textarea>
+          <div class="char-count"><span id="char-count">0</span>/500</div>
+        </div>
+
+        <div class="form-group name-group">
+          <label for="confession-name" class="name-label">...your stripper name</label>
+          <input
+            type="text"
+            id="confession-name"
+            placeholder="e.g., Diamond Delilah"
+            maxlength="40"
+            required
+            enterkeyhint="send"
+          >
+        </div>
+
+        <button type="submit" id="submit-btn" class="submit-btn">
+          <span class="btn-text">Confess</span>
+          <span class="btn-shimmer"></span>
+        </button>
+      </form>
+
+      <!-- Success state -->
+      <div class="success-message" id="success-message">
+        <div class="success-sparkles" id="success-sparkles"></div>
+        <div class="success-icon">✨</div>
+        <p class="success-text">Your confession has been received, darling.</p>
+        <button class="another-btn" id="another-btn">Confess Again</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="/static/landing/script.js"></script>
+</body>
+</html>

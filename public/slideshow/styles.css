@@ -1,0 +1,410 @@
+/* ═══════════════════════════════════════════════
+   Cabaret Confessions — Slideshow Display
+   Fully Responsive — Fills Any Window
+   ═══════════════════════════════════════════════ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --red-deep: #8B0000;
+  --red-crimson: #DC143C;
+  --red-wine: #722f37;
+  --purple-deep: #1a0a2e;
+  --purple-mid: #2d1b4e;
+  --gold: #D4AF37;
+  --gold-light: #FFD700;
+  --gold-pale: #F5DEB3;
+  --black: #0a0a0a;
+  --cream: #f5e6d3;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--black);
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--cream);
+  cursor: none;
+}
+
+/* ── Main Slideshow Container ──────────────── */
+.slideshow {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(139, 0, 0, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(45, 27, 78, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(114, 47, 55, 0.3) 0%, transparent 50%),
+    linear-gradient(
+      160deg,
+      #0d0208 0%,
+      #1a0510 15%,
+      var(--red-deep) 35%,
+      #5c0a1a 50%,
+      var(--purple-deep) 65%,
+      #1a0510 85%,
+      #0d0208 100%
+    );
+  background-size: 100% 100%, 100% 100%, 100% 100%, 300% 300%;
+  animation: bg-drift 25s ease infinite;
+}
+
+@keyframes bg-drift {
+  0%, 100% { background-position: 0 0, 0 0, 0 0, 0% 50%; }
+  33% { background-position: 0 0, 0 0, 0 0, 50% 100%; }
+  66% { background-position: 0 0, 0 0, 0 0, 100% 50%; }
+}
+
+/* ── Art Deco Corner Ornaments ─────────────── */
+.ornament {
+  position: absolute;
+  width: 6vw;
+  height: 6vw;
+  z-index: 10;
+  opacity: 0.6;
+}
+
+.ornament::before,
+.ornament::after {
+  content: '';
+  position: absolute;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+}
+
+.corner-tl {
+  top: 2.5vh;
+  left: 2vw;
+}
+.corner-tl::before {
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+}
+.corner-tl::after {
+  top: 0; left: 0;
+  width: 2px; height: 100%;
+}
+
+.corner-tr {
+  top: 2.5vh;
+  right: 2vw;
+}
+.corner-tr::before {
+  top: 0; right: 0;
+  width: 100%; height: 2px;
+}
+.corner-tr::after {
+  top: 0; right: 0;
+  width: 2px; height: 100%;
+}
+
+.corner-bl {
+  bottom: 2.5vh;
+  left: 2vw;
+}
+.corner-bl::before {
+  bottom: 0; left: 0;
+  width: 100%; height: 2px;
+}
+.corner-bl::after {
+  bottom: 0; left: 0;
+  width: 2px; height: 100%;
+}
+
+.corner-br {
+  bottom: 2.5vh;
+  right: 2vw;
+}
+.corner-br::before {
+  bottom: 0; right: 0;
+  width: 100%; height: 2px;
+}
+.corner-br::after {
+  bottom: 0; right: 0;
+  width: 2px; height: 100%;
+}
+
+/* Inner decorative lines on corners */
+.ornament::before {
+  box-shadow: 0 0.4vw 0 rgba(212, 175, 55, 0.3);
+}
+.ornament::after {
+  box-shadow: 0.4vw 0 0 rgba(212, 175, 55, 0.3);
+}
+
+/* ── Gold Frame Borders ────────────────────── */
+.frame-border {
+  position: absolute;
+  z-index: 9;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.15) 20%,
+    rgba(212, 175, 55, 0.3) 50%,
+    rgba(212, 175, 55, 0.15) 80%,
+    transparent 100%
+  );
+}
+
+.frame-top, .frame-bottom {
+  left: 9vw;
+  right: 9vw;
+  height: 1px;
+}
+.frame-top { top: 5vh; }
+.frame-bottom { bottom: 5vh; }
+
+.frame-left, .frame-right {
+  top: 15vh;
+  bottom: 15vh;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.15) 20%,
+    rgba(212, 175, 55, 0.3) 50%,
+    rgba(212, 175, 55, 0.15) 80%,
+    transparent 100%
+  );
+}
+.frame-left { left: 3vw; }
+.frame-right { right: 3vw; }
+
+/* ── Floating Particles ────────────────────── */
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: sparkle var(--dur, 5s) var(--del, 0s) infinite ease-in-out;
+  box-shadow: 0 0 8px var(--gold), 0 0 16px rgba(255, 215, 0, 0.3);
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0) translateY(0);
+  }
+  20% {
+    opacity: 0.9;
+    transform: scale(1) translateY(-1vh);
+  }
+  80% {
+    opacity: 0.6;
+    transform: scale(0.8) translateY(-3vh);
+  }
+}
+
+/* ── Slide Container ───────────────────────── */
+.slide-container {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ── Waiting / Idle State ──────────────────── */
+.waiting-state {
+  text-align: center;
+  animation: fade-in-up 1s ease;
+}
+
+.waiting-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 7vw;
+  line-height: 1.1;
+  background: linear-gradient(
+    90deg,
+    var(--gold) 0%,
+    var(--gold-light) 15%,
+    var(--gold-pale) 30%,
+    var(--gold-light) 50%,
+    var(--gold) 65%,
+    var(--gold-pale) 80%,
+    var(--gold) 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-gold 4s linear infinite;
+  filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.4));
+}
+
+@keyframes shimmer-gold {
+  0% { background-position: 300% 0; }
+  100% { background-position: -300% 0; }
+}
+
+.waiting-divider {
+  width: 16vw;
+  height: 2px;
+  margin: 2.5vh auto;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  position: relative;
+}
+
+.waiting-divider::after {
+  content: '◆';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--gold);
+  font-size: 0.6vw;
+  background: transparent;
+  padding: 0 0.6vw;
+}
+
+.waiting-subtitle {
+  font-size: 2vw;
+  font-style: italic;
+  color: rgba(245, 230, 211, 0.5);
+  animation: pulse-soft 3s ease-in-out infinite;
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+}
+
+/* ── Confession Slide ──────────────────────── */
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10vh 10vw;
+  opacity: 0;
+  transform: scale(0.97);
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.slide.exiting {
+  opacity: 0;
+  transform: scale(1.02);
+}
+
+/* ── Confession Text ───────────────────────── */
+.confession-text {
+  font-size: 4.5vw;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--cream);
+  font-style: italic;
+  max-width: 80vw;
+  margin-bottom: 4vh;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+.confession-quote {
+  font-family: 'Great Vibes', cursive;
+  font-size: 11vw;
+  color: var(--gold);
+  opacity: 0.25;
+  line-height: 0.4;
+  display: block;
+  margin-bottom: 2vh;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2));
+}
+
+/* ── Divider ───────────────────────────────── */
+.slide-divider {
+  width: 10vw;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto 3vh;
+  position: relative;
+}
+
+.slide-divider::before {
+  content: '✦';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--gold);
+  font-size: 0.5vw;
+}
+
+/* ── Confession Name ───────────────────────── */
+.confession-name {
+  font-family: 'Great Vibes', cursive;
+  font-size: 4.5vw;
+  background: linear-gradient(
+    90deg,
+    var(--gold) 0%,
+    var(--gold-light) 40%,
+    var(--gold-pale) 60%,
+    var(--gold) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-gold 3s linear infinite;
+  filter: drop-shadow(0 2px 6px rgba(212, 175, 55, 0.3));
+}
+
+/* ── Custom Slide ──────────────────────────── */
+.custom-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: 8vw;
+  text-align: center;
+  line-height: 1.3;
+  max-width: 80vw;
+  background: linear-gradient(
+    90deg,
+    var(--gold) 0%,
+    var(--gold-light) 20%,
+    var(--gold-pale) 40%,
+    var(--gold-light) 60%,
+    var(--gold) 80%,
+    var(--gold-pale) 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-gold 4s linear infinite;
+  filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.35));
+}
+
+/* ── Utility Animations ────────────────────── */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(3vh);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

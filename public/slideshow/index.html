@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cabaret Confessions — Live Slideshow</title>
+  <meta name="description" content="Live confession slideshow display for Cabaret Night">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/slideshow/styles.css">
+</head>
+<body>
+  <div class="slideshow" id="slideshow">
+    <!-- Ambient particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Art deco corner ornaments -->
+    <div class="ornament corner-tl"></div>
+    <div class="ornament corner-tr"></div>
+    <div class="ornament corner-bl"></div>
+    <div class="ornament corner-br"></div>
+
+    <!-- Gold border frame -->
+    <div class="frame-border frame-top"></div>
+    <div class="frame-border frame-bottom"></div>
+    <div class="frame-border frame-left"></div>
+    <div class="frame-border frame-right"></div>
+
+    <!-- Slide content area -->
+    <div class="slide-container" id="slide-container">
+      <!-- Waiting / idle state -->
+      <div class="waiting-state" id="waiting-state">
+        <h1 class="waiting-title">Cabaret Confessions</h1>
+        <div class="waiting-divider"></div>
+        <p class="waiting-subtitle">Scan the QR code to confess your sins...</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/slideshow/script.js"></script>
+</body>
+</html>

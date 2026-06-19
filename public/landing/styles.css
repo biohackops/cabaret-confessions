@@ -1,0 +1,484 @@
+/* ═══════════════════════════════════════════════
+   Cabaret Confessions — Landing Page Styles
+   iOS Safari Optimized
+   ═══════════════════════════════════════════════ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --red-deep: #8B0000;
+  --red-crimson: #DC143C;
+  --red-lipstick: #C41E3A;
+  --purple-deep: #1a0a2e;
+  --purple-mid: #2d1b4e;
+  --purple-light: #4a2c6e;
+  --gold: #D4AF37;
+  --gold-light: #FFD700;
+  --gold-pale: #F5DEB3;
+  --black: #0a0a0a;
+  --black-light: #1a1a1a;
+  --cream: #f5e6d3;
+  --cream-dim: rgba(245, 230, 211, 0.7);
+
+  /* Safe area insets for notched devices */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html {
+  height: 100%;
+  /* Prevent iOS rubber-banding on the html element */
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  height: 100dvh; /* Dynamic viewport height — adjusts with iOS address bar */
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--cream);
+  background: var(--black);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent text size adjustment on orientation change */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ── Background Video ──────────────────────── */
+#bg-video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: -2;
+  /* iOS Safari: prevent flickering */
+  -webkit-transform: translate(-50%, -50%) translateZ(0);
+  -webkit-backface-visibility: hidden;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.55) 0%,
+    rgba(26, 10, 46, 0.7) 40%,
+    rgba(139, 0, 0, 0.55) 100%
+  );
+  z-index: -1;
+}
+
+/* ── Floating Particles ────────────────────── */
+.particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: float-particle var(--dur, 7s) var(--del, 0s) infinite ease-out;
+  box-shadow: 0 0 6px var(--gold), 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+@keyframes float-particle {
+  0% {
+    opacity: 0;
+    transform: translateY(100vh) scale(0) rotate(0deg);
+  }
+  8% {
+    opacity: 0.9;
+  }
+  85% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-15vh) scale(1) rotate(180deg);
+  }
+}
+
+/* ── Main Container ────────────────────────── */
+.container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  height: 100dvh;
+  padding: calc(var(--safe-top) + 1.5rem) 1rem calc(var(--safe-bottom) + 1.5rem);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* iOS Safari: fill available space */
+@supports (-webkit-touch-callout: none) {
+  .container {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* ── Form Card ─────────────────────────────── */
+.form-card {
+  width: 100%;
+  max-width: 460px;
+  padding: 2.2rem 1.8rem;
+  background: linear-gradient(
+    145deg,
+    rgba(26, 10, 46, 0.82) 0%,
+    rgba(10, 10, 10, 0.88) 45%,
+    rgba(139, 0, 0, 0.35) 100%
+  );
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 24px;
+  /* iOS Safari: use -webkit-backdrop-filter */
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  backdrop-filter: blur(24px) saturate(1.3);
+  box-shadow:
+    0 0 40px rgba(139, 0, 0, 0.3),
+    0 0 80px rgba(26, 10, 46, 0.2),
+    inset 0 1px 0 rgba(212, 175, 55, 0.15);
+  animation: card-glow 4s ease-in-out infinite alternate;
+  /* GPU acceleration for iOS */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+@keyframes card-glow {
+  0% {
+    box-shadow:
+      0 0 40px rgba(139, 0, 0, 0.3),
+      0 0 80px rgba(26, 10, 46, 0.2),
+      inset 0 1px 0 rgba(212, 175, 55, 0.15);
+  }
+  100% {
+    box-shadow:
+      0 0 60px rgba(196, 30, 58, 0.35),
+      0 0 100px rgba(45, 27, 78, 0.25),
+      inset 0 1px 0 rgba(255, 215, 0, 0.25);
+  }
+}
+
+/* ── Title ──────────────────────────────────── */
+.title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2.1rem, 8vw, 3.4rem);
+  text-align: center;
+  margin-bottom: 1.8rem;
+  line-height: 1.3;
+  background: linear-gradient(
+    90deg,
+    var(--gold) 0%,
+    var(--gold-light) 20%,
+    var(--gold-pale) 40%,
+    var(--gold-light) 60%,
+    var(--gold) 80%,
+    var(--gold-light) 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-text 4s linear infinite;
+  filter: drop-shadow(0 2px 6px rgba(212, 175, 55, 0.35));
+}
+
+@keyframes shimmer-text {
+  0% { background-position: 300% 0; }
+  100% { background-position: -300% 0; }
+}
+
+/* ── Form Elements ─────────────────────────── */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+textarea,
+input[type="text"] {
+  width: 100%;
+  padding: 1rem;
+  font-family: 'Playfair Display', serif;
+  /* 16px minimum prevents iOS zoom on focus */
+  font-size: 16px;
+  color: var(--cream);
+  background: rgba(10, 10, 10, 0.55);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 14px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  /* iOS Safari: remove default styling */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+textarea {
+  resize: none;
+  min-height: 130px;
+  line-height: 1.65;
+}
+
+textarea:focus,
+input[type="text"]:focus {
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow:
+    0 0 20px rgba(212, 175, 55, 0.12),
+    inset 0 0 20px rgba(212, 175, 55, 0.04);
+}
+
+textarea::placeholder,
+input[type="text"]::placeholder {
+  color: rgba(245, 230, 211, 0.3);
+  font-style: italic;
+}
+
+.char-count {
+  text-align: right;
+  font-size: 0.75rem;
+  color: rgba(245, 230, 211, 0.35);
+  margin-top: 0.4rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Name Field ────────────────────────────── */
+.name-label {
+  display: block;
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(1.5rem, 5vw, 1.9rem);
+  margin-bottom: 0.65rem;
+  background: linear-gradient(
+    90deg,
+    var(--gold) 0%,
+    var(--gold-light) 40%,
+    var(--gold-pale) 60%,
+    var(--gold) 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-text 4s linear infinite;
+  filter: drop-shadow(0 1px 3px rgba(212, 175, 55, 0.3));
+}
+
+.name-group input {
+  padding: 0.85rem 1rem;
+}
+
+/* ── Submit Button ─────────────────────────── */
+.submit-btn {
+  position: relative;
+  width: 100%;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+  background-size: 200% 200%;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  /* iOS Safari: remove tap highlight */
+  -webkit-tap-highlight-color: transparent;
+  /* GPU acceleration */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.submit-btn:hover,
+.submit-btn:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.4);
+}
+
+.submit-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 100%
+  );
+  animation: btn-sweep 2.8s infinite;
+}
+
+@keyframes btn-sweep {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.submit-btn.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.submit-btn.loading .btn-shimmer {
+  animation: none;
+}
+
+/* ── Success State ─────────────────────────── */
+.success-message {
+  display: none;
+  text-align: center;
+  position: relative;
+  padding: 1rem 0;
+}
+
+.success-message.visible {
+  display: block;
+  animation: success-in 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes success-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.success-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  animation: pulse-glow 1.5s ease-in-out infinite;
+  /* GPU acceleration */
+  will-change: transform;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 10px var(--gold));
+  }
+  50% {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 25px var(--gold-light));
+  }
+}
+
+.success-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--cream);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.success-sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sparkle-dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--gold-light);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--gold);
+  animation: sparkle-burst var(--dur, 1s) var(--del, 0s) ease-out forwards;
+}
+
+@keyframes sparkle-burst {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx, 50px), var(--ty, -50px)) scale(0);
+  }
+}
+
+.another-btn {
+  padding: 0.75rem 2rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--gold);
+  background: transparent;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.another-btn:hover,
+.another-btn:active {
+  background: rgba(212, 175, 55, 0.12);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+  border-color: var(--gold);
+}
+
+/* ── iOS Keyboard Handling ─────────────────── */
+/* When iOS keyboard is shown, the viewport shrinks.
+   Using dvh and scroll ensures content remains accessible. */
+@media (max-height: 500px) {
+  .container {
+    align-items: flex-start;
+    padding-top: 0.5rem;
+  }
+  .form-card {
+    padding: 1.5rem 1.5rem;
+  }
+  .title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* ── Landscape on Mobile ───────────────────── */
+@media (orientation: landscape) and (max-height: 500px) {
+  .container {
+    padding: 0.5rem 1rem;
+  }
+  .form-card {
+    max-width: 600px;
+    padding: 1rem 1.5rem;
+  }
+  .title {
+    font-size: 1.6rem;
+    margin-bottom: 0.8rem;
+  }
+  textarea {
+    min-height: 80px;
+    rows: 3;
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "cabaret-confessions",
+  "version": "1.0.0",
+  "description": "1920s Cabaret Confessions - Interactive event web app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
