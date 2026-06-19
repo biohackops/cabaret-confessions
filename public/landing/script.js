@@ -21,6 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     particlesContainer.appendChild(p);
   }
 
+  // ── Reveal secret button after 3 seconds ────
+  setTimeout(() => {
+    const secretBtn = document.getElementById('secret-btn');
+    if (secretBtn) secretBtn.classList.add('revealed');
+  }, 3000);
+
   // ── Character counter ───────────────────────
   const textarea = document.getElementById('confession-text');
   const charCount = document.getElementById('char-count');
